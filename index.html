@@ -1,0 +1,832 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo Campesena</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            height: 100vh;
+            
+           
+        }
+        
+        .menu {
+            width: 240px;
+            height: 100%;
+            padding: 20px;
+            background: hsl(285, 96%, 43%);
+            color: rgb(6, 6, 6);
+            box-shadow: 4px 0 8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-right: 2px solid #ffffff;
+            transition: width 0.3s ease;
+        }
+        .menu1{
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+        }
+      
+
+        .menu button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            background-color: hsl(0, 0%, 100%);
+            color: rgb(9, 9, 9);
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+        }
+        .menu .salir{
+          display: flex;
+          flex-direction: column-reverse;
+          width: 100%;
+          height: 100%;
+          margin-bottom: 10%;
+        
+        }
+
+        .menu button:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .menu button i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .header {
+    margin-top: -30px;
+    background: hsl(285, 96%, 43%);
+    color: #39a900;
+    padding: 10px;
+    text-align: center;
+    font-size: 3.2em; /* Ajusta el tamaño del texto automáticamente */
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-shadow: 2px 2px 2px #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width:100%;
+}
+
+.contenido {
+    padding: 20px;
+    flex-grow: 1;
+    background: url(fondo.jpg);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0;
+    margin: 0; /* Elimina márgenes laterales */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 300px;
+
+    width: 100%;
+}
+
+
+
+@media (max-width: 768px) {
+    .menu {
+        width: 150px;
+        left: -250px; /* Ajusta la posición del menú para pantallas más pequeñas */
+    }
+
+    .header {
+        font-size: 6vw; /* Ajusta el tamaño del texto en pantallas pequeñas */
+    }
+
+    #menu-button {
+        top: 15px;
+        left: 15px;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #imagenContenido {
+        max-width: 90%; /* Asegura que la imagen no se salga de la pantalla en dispositivos móviles */
+    }
+   
+}
+
+
+        .menu {
+    width: 240px;
+    height: 100%;
+    padding: 20px;
+    background: hsl(285, 96%, 43%);
+    color: rgb(6, 6, 6);
+    box-shadow: 4px 0 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-right: 2px solid #ffffff;
+    position: fixed;
+    left: -290px; /* Cambiado a -260px para ocultarlo completamente */
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+.menu.open {
+    left: 0; /* Muestra el menú */
+}/* From Uiverse.io by tarantino421 */ 
+/* Botón sin animación */
+
+.static-burger #burger-static {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos generales para .static-burger */
+.static-burger {
+    margin-top: -10px; /* Se eleva un poco más */
+    --size: 3.5rem; /* Tamaño predeterminado un poco más grande */
+    width: var(--size);
+    height: calc(0.7 * var(--size));
+    cursor: pointer;
+    position: relative;
+    display: block;
+}
+.bpton{
+margin-top: 50px;
+
+}
+.static-burger span {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 5px; /* Grosor ligeramente mayor */
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+/* Ajuste para tablets (pantallas medianas) */
+@media (max-width: 768px) {
+    .static-burger {
+        margin-top: -8px; /* Ajusta la posición en tablets */
+        --size: 3rem; /* Tamaño ajustado para tablets */
+    }
+    .static-burger span {
+        height: 4px; /* Grosor ajustado */
+    }
+}
+
+/* Ajuste para móviles (pantallas pequeñas) */
+@media (max-width: 480px) {
+    .static-burger {
+        margin-top: -30px; /* Ajusta la posición en móviles */
+        --size: 2.5rem; /* Tamaño ajustado para móviles */
+        margin-left: -20px;
+    }
+    .static-burger span {
+        height: 3px; /* Grosor más fino */
+    }
+}
+
+
+.static-burger span:nth-of-type(1) {
+    top: 0;
+}
+
+.static-burger span:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.static-burger span:nth-of-type(3) {
+    top: 100%;
+    transform: translateY(-100%);
+}
+
+
+
+
+        .menu button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            background-color: hsl(0, 0%, 100%);
+            color: rgb(9, 9, 9);
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu button:hover {
+            background-color: #ffffff;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+
+       
+
+     
+        #menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background-color: hsl(285, 96%, 43%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #menu-button:hover {
+            background-color: hsl(285, 76%, 53%);
+        }
+
+        .close-menu {
+            align-self: flex-end;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            margin-left: auto; /* Alinea a la derecha */
+        }
+        .cuidado{
+            width: 90%;
+        }
+        .aa{
+width: 5.5%;
+height: 7%;
+margin-top: -10px;
+position: absolute;
+        }
+      
+
+       
+        #textoContenido {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tarjetas {
+            display: none;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .card {
+            width: 180px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .card-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .card-description {
+            font-size: 0.9em;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            .menu {
+                width: 100px;
+                font-size: 10px;
+                color: black;
+            }
+            .header{
+                font-size: 20px;
+            }
+        }
+        a{
+text-decoration: none;
+color: black;
+        }
+        .chat-button {
+      position: fixed;
+      bottom: 50px;
+      right: 40px;
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+    
+      margin-top: 50px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      
+    }
+
+    .chat-icon {
+      width: 95%;
+      height: auto;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+
+    
+    }
+
+    .chat-button:hover .chat-icon {
+      transform: scale(1.3);
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+    }
+
+    .chat-button:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgba(0, 0, 0, 0.5);
+      
+    }
+
+
+    .chat-container {
+      
+      display: none;
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 400px;
+      height: 650px;
+      border: 3px solid #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      background-color: #ffffff;
+      animation: slideUp 0.5s ease forwards;
+      overflow: hidden;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .chat-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .chat-header {
+      background: linear-gradient(45deg, #ffffff, #ffffff);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 22px;
+      position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      letter-spacing: 1px;
+      
+    }
+
+    .chat-header .close-btn {
+      position: absolute;
+      right: 5px;
+      top: -8px;
+      margin-left: 5px;
+      background: none;
+      border: none;
+      color: rgb(255, 0, 0);
+      font-size: 40px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .chat-header .close-btn:hover {
+      color: #ff0000;
+    }
+
+    span.a1 { color: #bf00ff; font-size: 1.2em; letter-spacing: 1px; }
+    span.a2 { color: #f8f8f8; font-size: 1.2em; letter-spacing: 1px; }
+    span.a3 { color: #000000; font-size: 1.2em; letter-spacing: 1px; }
+    .a4 { color: red; font-weight: bold; font-size: 1.2em; }
+    .a5 { color: rgb(0, 0, 0); font-weight: bold; font-size: 1.2em; }
+
+    .chat-button, .close-btn { transition: all 0.3s ease; }
+
+    @media (max-width: 600px) {
+      .chat-container { width: 90%; height: 80vh; }
+      .chat-button { width: 60px; height: 60px; }
+    }
+    figure {
+            border-radius: 100%;
+            display: block;
+            height: 150px;
+            position: relative;
+            width: 150px;
+          
+        }
+        figure:after {
+          font-family: sans-serif;
+          opacity: 0;
+            border-radius: 5px;
+            color: hsl(290, 80%, 30%);
+            font-size: 0.8em;
+            content: attr(title);
+            opacity: 0;
+            padding: 6px 12px;
+            position: absolute;
+            left: 50%;
+            top: 170%;
+            transform: translateX(-50%);
+            transition: all .25s ease;
+            visibility: hidden;
+            white-space: nowrap;
+            bottom: 110%;
+            margin-left: 410%;
+
+     
+        }
+       
+
+        figure:hover:after {
+            opacity: 1;
+            visibility: visible;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="bpton">
+    <div class="chat-button" id="chatButton">    
+        <img src="LOGO.png" alt="Chat" class="chat-icon">
+      </div></div>
+    </figure>
+      <div class="chat-container" id="chatContainer">
+        <div class="chat-header">
+      <span class="a3"> Chat de </span><span class="a1">Campe</span><span class="a2">sena</span>
+      <button class="close-btn" id="closeChat">&times;</button>
+      </div>
+      <iframe  src="../chat-bot/chat-bot-español.html"></iframe>
+      </div>
+    
+      <button id="menu-button" class="aa">
+        <label class="static-burger" for="burger-static">
+            <input type="checkbox" id="burger-static">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </button>
+
+    <div class="menu" id="menu">
+        <span class="close-menu" id="close-button">&times;</span>
+        <div class="menu1">
+       
+            <button onclick="mostrarContenido('inicio')"><i></i>Inicio</button>
+            <button onclick="mostrarContenido('registrar')"><i></i>REGISTRAR</button>
+            <button onclick="mostrarContenido('animalTerrestre')"><i></i>CODIGO QR</button>
+        </div>
+        <div class="salir">
+            <a href="https://tecnoacademiacucuta.com/"> <button onclick="mostrarContenido('animalAcuatico')"><i></i>SALIR</button></a>
+             </div>
+    </div>  
+    
+   
+    </div>
+
+    <div class="contenido" id="contenido">
+        <div class="header">BIENVENIDO A MODULO CAMPESENA</div><br>
+        <div id="textoContenido"></div>
+     <img id="imagenContenido" src="cuidado.jpg" alt="Cuidado" width="700PX" height="500">
+        <div id="tarjetas" class="tarjetas"></div>
+    </div>
+    
+
+
+    <script>
+        // Función para mostrar el contenido de acuerdo a la opción seleccionada
+        function mostrarContenido(opcion) {
+            const textoContenido = document.getElementById('textoContenido');
+            const imagenContenido = document.getElementById('imagenContenido');
+            const tarjetas = document.getElementById('tarjetas');
+            const contenido = document.getElementById('contenido');
+    
+            contenido.classList.remove('visible');
+            setTimeout(() => {
+                imagenContenido.style.display = 'none';
+                tarjetas.style.display = 'none';
+                tarjetas.innerHTML = '';
+
+                switch(opcion) {
+                    case 'inicio':
+                        textoContenido.textContent = '';
+                        imagenContenido.src = 'cuidado.jpg';
+                        imagenContenido.alt = 'cuidado.png';
+                        imagenContenido.style.display = 'block';
+                        break;
+                    case 'registrar':
+                        textoContenido.innerHTML = registrar.join(""); // Muestra el contenido de registrar
+                        break;   
+                  
+                    case 'codigo':
+                        textoContenido.textContent = 'Descubre todo lo que necesitas saber sobre Los animales terrestres.';
+                        mostrarTarjetasAnimales(animalesTerrestres);
+                        break;
+                    case 'animalAcuatico':
+                        textoContenido.textContent = 'Descubre todo lo que necesitas saber sobre Los animales acuáticos.';
+                        mostrarTarjetasAnimales(animalesAcuaticos);
+                        break;
+                    default:
+                        textoContenido.textContent = 'Selecciona una opción del menú.';
+                }
+    
+                contenido.classList.add('visible');
+            }, 500);
+        }
+    
+        const registrar = [
+    `
+    <form  action="guardar_animal.php" method="post" id="formRegistro" style="display: flex; flex-wrap: wrap; max-width: 800px; margin-top: 20px; gap: 20px; background: white;">
+        <h2 style="width: 100%; color: red;">Registro de Animal</h2>
+
+        <!-- Columna 1 -->
+        <div style="flex: 1; padding-right: 10px;">
+            <label for="nombre">Nombre del Animal:</label>
+            <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px;  ">
+
+            <label for="especie">Especie:</label>
+            <select name="especie" id="especie" required style="width: 107%; padding: 10px; margin-top: 5px; margin-bottom: 20px; " onchange="actualizarAnimales()">
+                <option disabled selected value="0">Seleccione la especie</option>
+                <option style="color:black; font-size:20px" value="bovino">Bovino</option>
+                <option style="color:black; font-size:20px" value="caprino">Caprino</option>
+                <option style="color:black; font-size:20px" value="porcino">Porcino</option>
+                <option style="color:black; font-size:20px" value="equino">Equino</option>
+            </select>
+
+         
+
+            <label>Fecha de Nacimiento:</label>
+            <input type="date" name="fechaNacimiento" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; ">
+                
+            
+            
+            <label title="Tipo de la tarea">Enfermedades</label>
+            <select name="enfermedades" required style="width: 107%; padding: 10px; margin-top: 5px; margin-bottom: 20px; ">
+                                <option disabled selected value="0">Seleccione</option>
+                                <option style="color:black; font-size:20px" value="Ninguna">Ninguna</option>
+                                <option style="color:black; font-size:20px" value="fiebre_aftosa">Fiebre Aftosa</option>
+                                <option style="color:black; font-size:20px" value="brucelosis">Brucelosis</option>
+                                <option style="color:black; font-size:20px" value="tuberculosis_bovina">Tuberculosis Bovina</option>
+                                <option style="color:black; font-size:20px" value="mastitis">Mastitis</option>
+                                <option style="color:black; font-size:20px" value="paratuberculosis">Paratuberculosis</option>
+                                <option style="color:black; font-size:20px" value="leptospirosis">Leptospirosis</option>
+                                <option style="color:black; font-size:20px" value="diarrea_viral_bovina">Diarrea Viral Bovina (BVD)</option>
+                                <option style="color:black; font-size:20px" value="linfadenitis_caseosa">Linfadenitis Caseosa</option>
+                                <option style="color:black; font-size:20px" value="peste_porcina_clasica">Peste Porcina Clásica</option>
+                                <option style="color:black; font-size:20px" value="fiebre_q">Fiebre Q</option>
+                            </select>
+ 
+            </div>
+            
+
+            
+        <!-- Columna 2 -->
+        <div style="flex: 1; padding-left: 10px;">
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required style="width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 15px; ">
+ <label for="animal">Animal:</label>
+            <select   name="animal" id="animal" required style="width: 107%; padding: 10px; margin-top: 5px; margin-bottom: 20px; " >
+                <option disabled selected value="0">Seleccione</option>
+            </select>
+            <label title="Tipo de la tarea">Vacunas</label><br>
+            <select  name="vacunas" required style="width: 107%; padding: 10px; margin-top: 5px; margin-bottom: 20px; ">
+                <option disabled selected value="0">Seleccione</option>
+                <option style="color:black; font-size:20px" value="ibr">IBR</option>
+                <option style="color:black; font-size:20px" value="leptóspira">Leptospira</option>
+                <option style="color:black; font-size:20px" value="rabia">Rabia</option>
+            </select>
+
+
+
+
+
+            
+       
+
+
+
+        </div>
+        <br><br>
+
+        <!-- Descripción y botón en ambas columnas -->
+        <div style="width: 100%;">
+            <label for="descripcion">Descripción:</label>
+            <textarea  id="descripcion" name="descripcion" required style="width: 95%; padding: 10px; margin-top: 5px; margin-bottom: 15px;" placeholder ="Alguna caracteristica fenotipica del animal"></textarea>
+
+            <button type="submit" style="background-color: #30a900; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width:200px;">Registrar</button>
+        </div>
+    </form>
+    `
+];
+
+        function actualizarAnimales() {
+            const especieSelect = document.getElementById("especie");
+            const animalSelect = document.getElementById("animal");
+
+            // Limpiar opciones anteriores
+          
+            animalSelect.innerHTML = '<option disabled selected value="0">Seleccione</option>';
+
+            // Obtener la especie seleccionada
+            const especie = especieSelect.value;
+
+            // Definir las opciones de animales según la especie
+            const opciones = {
+                bovino: ["Toro", "Vaca", "Becerro"],
+                caprino: ["Cabra", "Chivo"],
+                porcino: ["Cerdo"],
+                equino: ["Caballo", "Yegua", "Potro"]
+            };
+
+            // Agregar las opciones al select de animales
+            if (opciones[especie]) {
+                opciones[especie].forEach(function(animal) {
+                    const option = document.createElement("option");
+                    option.textContent = animal;
+                    option.style.color = "black";
+                    option.style.fontSize = "20px";
+                    animalSelect.appendChild(option);
+                });
+            }
+        }
+
+
+         
+        const animalesTerrestres = [
+    { img: 'qr-vaca.png', title: 'Las Vacas', description: 'Descubre información fascinante sobre las vacas y su hábitat.' },
+    { img: 'qr-vaca.png', title: 'Los Toros', description: 'Conoce datos interesantes sobre los toros y sus características.' },
+    { img: 'qr-vaca.png', title: 'Las Gallinas', description: 'Explora el mundo de las gallinas y su importancia en la granja.' },
+    { img: 'qr-vaca.png', title: 'Los Perros', description: 'Aprende sobre la lealtad y habilidades de los perros como mascotas.' },
+    { img: 'qr-vaca.png', title: 'Los Gatos', description: 'Descubre la independencia y curiosidades de los gatos domésticos.' },
+    { img: 'qr-vaca.png', title: 'Los Caballos', description: 'Conoce la historia y el papel de los caballos en la humanidad.' },
+    { img: 'qr-vaca.png', title: 'Los Cerdos', description: 'Explora la inteligencia de los cerdos y su importancia en la agricultura.' },
+    { img: 'qr-vaca.png', title: 'Las Ovejas', description: 'Descubre el mundo de las ovejas y la producción de lana.' },
+];
+
+    
+        const animalesAereos = [
+        { img: 'qr-aguila.png', title: 'Águilas', description: 'Explora el majestuoso mundo de las águilas y su vuelo en las alturas.' },
+            { img: 'qr-vaca.png', title: 'Colibríes', description: 'Descubre la increíble agilidad y el colorido de los colibríes.' },
+            { img: 'qr-vaca.png', title: 'Búhos', description: 'Aprende sobre los búhos, su nocturnidad y sus habilidades de caza.' },
+            { img: 'qr-vaca.png', title: 'Pájaros Carpinteros', description: 'Conoce a los pájaros carpinteros y su distintivo sonido al picotear.' },
+            { img: 'qr-vaca.png', title: 'Flamingos', description: 'Descubre la belleza de los flamingos y sus características sociales.' },
+            { img: 'qr-vaca.png', title: 'Gaviotas', description: 'Aprende sobre las gaviotas y su adaptabilidad en entornos costeros.' },
+            { img: 'qr-vaca.png', title: 'Cernícalos', description: 'Conoce a los cernícalos y su papel en el control de plagas.' },
+            { img: 'qr-vaca.png', title: 'Albatros', description: 'Descubre la vida de los albatros y su capacidad para volar largas distancias.' },
+        ];
+    
+        const animalesAcuaticos = [
+            { img: 'qr-vaca.png', title: 'Peces', description: 'Explora el increíble mundo de los peces y sus hábitats acuáticos.' },
+            { img: 'qr-vaca.png', title: 'Delfines', description: 'Descubre la inteligencia y la sociabilidad de los delfines.' },
+            { img: 'qr-vaca.png', title: 'Tortugas', description: 'Aprende sobre las diferentes especies de tortugas y su vida marina.' },
+            { img: 'qr-vaca.png', title: 'Medusas', description: 'Conoce las fascinantes medusas y sus sorprendentes características.' },
+            { img: 'qr-vaca.png', title: 'Ballenas', description: 'Descubre el impresionante mundo de las ballenas y su migración.' },
+            { img: 'qr-vaca.png', title: 'Salmón', description: 'Aprende sobre el ciclo de vida del salmón y su importancia ecológica.' },
+            { img: 'qr-vaca.png', title: 'Tiburones', description: 'Conoce a los tiburones y su rol en el ecosistema marino.' },
+            { img: 'qr-vaca.png', title: 'Pulpos', description: 'Descubre la inteligencia y las habilidades del pulpo.' },
+        ];
+    
+        // Función para mostrar las tarjetas de los animales
+        function mostrarTarjetasAnimales(animales) {
+            const tarjetas = document.getElementById('tarjetas');
+            tarjetas.style.display = 'flex';
+            animales.forEach(animal => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                   
+                    <img src="${animal.img}" alt="${animal.title}">
+                    <div class="card-title">${animal.title}</div>
+                    <div class="card-description">${animal.description}</div>
+                `;
+                tarjetas.appendChild(card);
+            });
+        }
+
+        // Mostrar contenido por defecto
+        window.onload = () => {
+            mostrarContenido('inicio');
+        };
+    </script>
+     <script>
+        const chatButton = document.getElementById("chatButton");
+        const chatContainer = document.getElementById("chatContainer");
+        const closeChat = document.getElementById("closeChat");
+        const tooltip = document.getElementById("chatTooltip");
+        let tooltipTimeout;
+    
+        chatButton.addEventListener("click", function() {
+          const isOpen = chatContainer.style.display === "block";
+          chatContainer.style.display = isOpen ? "none" : "block";
+          tooltip.style.display = isOpen ? 'block' : 'none'; // Muestra el tooltip si el chat se cierra
+          tooltip.style.opacity = isOpen ? '1' : '0'; // Ajusta la opacidad del tooltip
+        });
+    
+        closeChat.addEventListener("click", function() {
+          chatContainer.style.display = "none";
+          tooltip.style.display = 'block'; // Mostrar el tooltip al cerrar
+          tooltip.style.opacity = '1'; // Asegúrate de que la opacidad sea visible
+        });
+    
+        chatButton.addEventListener("mouseover", function() {
+          if (chatContainer.style.display !== "block") {
+            tooltipTimeout = setTimeout(() => {
+              tooltip.style.display = 'block';
+              tooltip.style.opacity = '1';
+            }, 300); // Retraso de 300 ms antes de mostrar el tooltip
+          }
+        });
+    
+        chatButton.addEventListener("mouseout", function() {
+          clearTimeout(tooltipTimeout); // Limpiar el timeout si se sale del botón
+          if (chatContainer.style.display !== "block") {
+            tooltip.style.display = 'none';
+          }
+        });
+    
+        chatContainer.addEventListener("mouseover", function() {
+          tooltip.style.display = 'none';
+        });
+        
+        chatContainer.addEventListener("mouseout", function() {
+          tooltip.style.display = 'none';
+        }); // Función para mostrar el menú
+const menu = document.getElementById('menu');
+const menuButton = document.getElementById('menu-button');
+const closeButton = document.getElementById('close-button');
+
+menuButton.addEventListener('click', function() {
+    menu.classList.add('open'); // Abre el menú
+    menuButton.style.display = 'none'; // Oculta el botón de menú
+});
+
+closeButton.addEventListener('click', function() {
+    menu.classList.remove('open'); // Cierra el menú
+    menuButton.style.display = 'block'; // Muestra el botón de menú
+});
+
+      </script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario de Inicio de Sesión y Registro</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('EL campo.png');
+      background-size: cover;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .auth-container {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 25px 35px;
+      border-radius: 15px;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      width: 360px;
+      max-width: 90%;
+      transition: transform 0.3s;
+    }
+
+    .auth-container:hover {
+      transform: scale(1.03);
+    }
+
+    .auth-box h2 {
+      font-size: 28px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .tab-button {
+      background-color: transparent;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #555;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding-bottom: 5px;
+    }
+
+    .tab-button.active {
+      color: #4caf50;
+      border-bottom: 3px solid #4caf50;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 14px;
+      margin-top: 5px;
+      background-color: #f9f9f9;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+      transform: translateY(-2px);
+    }
+
+    .captcha-group {
+  margin-top: -10px;
+  padding: 8px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Asegura que las imágenes estén alineadas */
+  gap: 10px;
+}
+
+.captcha-group img#captchaImage {
+  width: 270px; /* Ajusta el ancho de la imagen */
+  height: 50px; /* Ajusta la altura de la imagen */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.captcha-group input[type="text"] {
+  height: 20px;
+  font-size: 16px;
+  width: 250px;
+  margin-right: 5px;
+  text-align: center; /* Centra el texto en el campo */
+}
+@media (max-width: 419px) {
+  .captcha-group {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos de forma horizontal */
+    gap: 10px; /* Espacio entre la imagen CAPTCHA y el campo de texto */
+    align-items: center; /* Asegura que los elementos estén alineados verticalmente */
+  }
+
+  .captcha-group img#captchaImage {
+    width: 190px; /* Ajusta el tamaño de la imagen CAPTCHA en dispositivos pequeños */
+    height: auto;
+  }
+
+  .captcha-group input[type="text"] {
+    flex-grow: 1; /* Hace que el campo de texto ocupe todo el espacio disponible */
+    width: auto; /* Ajusta el campo de texto para que ocupe más espacio sin exceder el límite */
+    min-width: 200px; /* Asegura un tamaño mínimo para el campo de texto */
+  }
+
+  .captcha-group .captcha-refresh {
+    width: 20px; /* Tamaño reducido */
+    height: 30px;
+    top: 0; /* Mantiene el botón de refresco alineado con el campo CAPTCHA */
+  }
+}
+
+
+.captcha-group .captcha-refresh {
+  width: 50px; /* Tamaño reducido */
+  height: 50px;
+  border-radius: 50%; /* Redondea la imagen */
+  cursor: pointer;
+  transition: transform 0.3s;
+  position: relative;
+  top: -53px; /* Ajusta este valor para subir la imagen */
+}
+
+.captcha-group .captcha-refresh:hover {
+  transform: rotate(90deg); /* Rotación al pasar el mouse */
+}
+
+
+.captcha-group .captcha-refresh {
+  width: 50px; /* Tamaño reducido */
+  height: 50px;
+  border-radius: 50%; /* Redondea la imagen */
+  cursor: pointer;
+  transition: transform 0.3s;
+  position: relative;
+  top: -53px; /* Ajusta este valor para subir la imagen */
+}
+
+
+.captcha-group .captcha-refresh:hover {
+  transform: rotate(90deg); /* Rotación al pasar el mouse */
+}
+
+
+
+    #captchaError, #loginError {
+      color: red;
+      font-size: 13px;
+      display: none;
+      text-align: center;
+      margin-top: 5px;
+    }
+
+    span.a {
+      color: #700a70;
+    }
+
+    span.b {
+      color: #216f00;
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h2><span class="a">CAMPE</span><span class="b">SENA</span></h2>
+      <div class="tabs">
+        <button id="loginBtn" class="tab-button active">Iniciar sesión</button>
+        <button id="registerBtn" class="tab-button">Registrarse</button>
+      </div>
+      <form id="authForm">
+        <div class="form-group">
+          <label for="username">Usuario</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group" id="emailGroup" style="display: none;">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email">
+        </div>
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+          <label for="confirmPassword">Confirmar contraseña</label>
+          <input type="password" id="confirmPassword" name="confirmPassword">
+        </div>
+        <div class="form-group captcha-group">
+          <img src="img1.jpg" alt="Captcha" id="captchaImage">
+          <input type="text" id="captcha" name="captcha" placeholder="Escribe el texto">
+          <img src="devolver.png" alt="Botón para refrescar captcha" class="captcha-refresh">
+        </div>
+        
+        
+        <p id="captchaError">El texto del CAPTCHA no es correcto. Intenta de nuevo.</p>
+        <p id="loginError">Usuario o contraseña incorrectos. Intenta de nuevo.</p>
+        <button type="submit" id="submitBtn">Iniciar sesión</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginBtn = document.getElementById('loginBtn');
+      const registerBtn = document.getElementById('registerBtn');
+      const authForm = document.getElementById('authForm');
+      const captchaImage = document.getElementById('captchaImage');
+      const captchaError = document.getElementById('captchaError');
+      const submitBtn = document.getElementById('submitBtn');
+      const loginError = document.getElementById('loginError');
+      const captchaRefreshBtn = document.querySelector('.captcha-refresh');
+
+captchaRefreshBtn.addEventListener('click', () => {
+  // Selecciona aleatoriamente un nuevo CAPTCHA
+  const randomCaptcha = captchaList[Math.floor(Math.random() * captchaList.length)];
+  captchaText = randomCaptcha.text;
+  captchaImage.src = randomCaptcha.img;
+
+  // Limpia el campo de entrada de CAPTCHA
+  document.getElementById('captcha').value = '';
+  captchaError.style.display = 'none'; // Oculta el mensaje de error del CAPTCHA
+});
+
+      // Lista de imágenes CAPTCHA con sus textos correspondientes
+      const captchaList = [
+        { img: 'img1.jpg', text: '552k1' },
+        { img: 'img2.jpg', text: '32bq6' },
+        { img: 'img3.jpg', text: '2dr6t' },
+        { img: 'img4.jpg', text: '375m1' },
+        { img: 'img5.jpg', text: '335a1' },
+        { img: 'img6.jpg', text: 'j2ik8' },
+        { img: 'img7.jpg', text: '8w166' },
+        { img: 'img8.jpg', text: '82b43' },
+        { img: 'img9.jpg', text: '27411' },
+        { img: 'img10.jpg', text: '533t4' }
+      ];
+
+      let captchaText = ''; 
+      let isLogin = true;
+
+      // Manejador de los botones de cambiar entre login y registro
+      loginBtn.addEventListener('click', () => {
+        isLogin = true;
+        toggleForm();
+      });
+
+      registerBtn.addEventListener('click', () => {
+        isLogin = false;
+        toggleForm();
+      });
+
+      // Cambio de visibilidad entre los campos de Login y Registro
+      function toggleForm() {
+        if (isLogin) {
+          document.getElementById('emailGroup').style.display = 'none';
+          document.getElementById('confirmPasswordGroup').style.display = 'none';
+          document.querySelector('.captcha-group').style.display = 'block';
+          submitBtn.textContent = 'Iniciar sesión';
+
+          // Seleccionar aleatoriamente un CAPTCHA
+          const randomCaptcha = captchaList[Math.floor(Math.random() * captchaList.length)];
+          captchaText = randomCaptcha.text;
+          captchaImage.src = randomCaptcha.img;
+        } else {
+          document.getElementById('emailGroup').style.display = 'block';
+          document.getElementById('confirmPasswordGroup').style.display = 'block';
+          document.querySelector('.captcha-group').style.display = 'none';
+          submitBtn.textContent = 'Registrarse';
+        }
+
+        // Limpiar errores y campos cuando cambiamos entre login y registro
+        captchaError.style.display = 'none';
+        loginError.style.display = 'none';
+        document.getElementById('captcha').value = '';
+      }
+
+      // Validación y envío del formulario
+      authForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const captchaInput = document.getElementById('captcha').value;
+
+        // Verificar CAPTCHA solo en login
+        if (isLogin && captchaInput !== captchaText) {
+          captchaError.style.display = 'block';
+
+          // Esperar 5 segundos antes de ocultar el mensaje de error
+          setTimeout(() => {
+            captchaError.style.display = 'none';
+          }, 3000);
+
+          // Seleccionar aleatoriamente un nuevo CAPTCHA
+          const randomCaptcha = captchaList[Math.floor(Math.random() * captchaList.length)];
+          captchaText = randomCaptcha.text;
+          captchaImage.src = randomCaptcha.img;
+
+          return;
+        }
+
+        // Verificar credenciales
+        if (username === 'tecnoacademia' && password === '123') {
+          if (isLogin) {
+            console.log('Inicio de sesión exitoso');
+            // Redirigir a interfas.html si las credenciales y el CAPTCHA son correctos
+            window.location.href = 'file:///C:/Users/ingri/OneDrive/Escritorio/a//index.html';  // Redirigir a interfas.html
+            return;
+          }
+        } else {
+          loginError.style.display = 'block';
+        }
+
+        // Aquí se realizaría el envío de datos (ejemplo de consola)
+        if (isLogin) {
+          console.log('Iniciar sesión:', username, password);
+        } else {
+          console.log('Registrarse:', username, document.getElementById('email').value, password, document.getElementById('confirmPassword').value);
+        }
+      });
+
+      // Inicializar el formulario en modo de "Iniciar sesión"
+      toggleForm();
+    });
+    
+  </script>
+</body>
+</html>
